@@ -12,65 +12,90 @@ const names = [
 
 // データ読み込み
 Promise.all([
- fetch("data.json").then(r=>r.json()),
- fetch("labels.json").then(r=>r.json())
+  fetch("data.json").then(r => r.json()),
+  fetch("labels.json").then(r => r.json())
 ])
-.then(files=>{
- data = files[0];
- labels = files[1];
+.then(files => {
+  data = files[0];
+  labels = files[1];
 
- console.log("データ読み込み完了");
+  console.log("データ読み込み完了");
 });
 
 
-// カメラ画像を比較する準備
+// Python版と同じ比較
 const canvas = document.createElement("canvas");
 const ctx = canvas.getContext("2d");
 
 
 function recognize(){
 
- canvas.width = 100;
- canvas.height = 100;
+  canvas.width = 100;
+  canvas.height = 100;
 
- ctx.drawImage(video,0,0,100,100);
+  ctx.drawImage(video,0,0,100,100);
 
- let image =
- ctx.getImageData(0,0,100,100).data;
-
-
- let best = 999999999;
- let answer = 0;
+  const img =
+    ctx.getImageData(0,0,100,100).data;
 
 
- for(let i=0;i<data.length;i++){
+  let best = Infinity;
+  let answer = -1;
 
-  let distance = 0;
 
-  for(let j=0;j<image.length;j++){
+  for(let i=0;i<data.length;i++){
 
-   distance +=
-   Math.abs(image[j]-data[i][j%data[i].length]);
+    let distance = 0;
+
+
+    for(let j=0;j<img.length;j++){
+
+      let diff =
+        img[j] - data[i][j];
+
+      distance += diff * diff;
+
+    }
+
+
+    distance =
+      distance / img.length;
+
+
+    if(distance < best){
+
+      best = distance;
+      answer = labels[i];
+
+    }
 
   }
 
 
-  if(distance < best){
-    best = distance;
-    answer = labels[i];
+  console.log(
+    "判定:",
+    answer,
+    "距離:",
+    best
+  );
+
+
+  if(answer >= 0){
+
+    result.innerText = names[answer];
+
   }
-
- }
-
- console.log(answer);
- result.innerText = names[answer];
 
 }
 
 
-// 1秒ごとに確認
+// 1秒ごとに認識
 setInterval(()=>{
- if(data.length>0){
-  recognize();
- }
+
+  if(data.length > 0){
+
+    recognize();
+
+  }
+
 },1000);
