@@ -62,7 +62,7 @@ function recognize(){
 
  }
 
-
+ console.log(answer);
  result.innerText = names[answer];
 
 }
