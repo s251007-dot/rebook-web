@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>rebloom</title>
+
+<style>
+body{
+    text-align:center;
+    font-family:sans-serif;
+}
+
+video{
+    width:90%;
+    border-radius:20px;
+}
+
+#result{
+    font-size:30px;
+    margin-top:20px;
+    white-space:pre-line;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>🌱 rebloom</h1>
+
+<video id="video" autoplay playsinline></video>
+
+<div id="result">
+商品をカメラに映してください
+</div>
+
+
+<script>
+
+const video = document.getElementById("video");
+
+navigator.mediaDevices.getUserMedia({
+    video:{
+        facingMode:"environment"
+    }
+})
+.then(stream=>{
+    video.srcObject = stream;
+})
+.catch(error=>{
+    alert("カメラが使えません");
+});
+
+
+</script>
+
+</body>
+</html>
