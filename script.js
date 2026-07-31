@@ -1,3 +1,5 @@
+alert("script.js読み込み完了");
+
 let data = [];
 let labels = [];
 
