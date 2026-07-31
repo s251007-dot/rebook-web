@@ -6,25 +6,19 @@
 
 <style>
 body{
- text-align:center;
- font-family:sans-serif;
+    text-align:center;
+    font-family:sans-serif;
 }
 
 video{
- width:90%;
- border-radius:20px;
+    width:90%;
+    border-radius:20px;
 }
 
 #result{
- font-size:25px;
- margin-top:20px;
- white-space:pre-line;
-}
-
-button{
- font-size:20px;
- margin:10px;
- padding:10px;
+    font-size:25px;
+    margin-top:20px;
+    white-space:pre-line;
 }
 </style>
 
@@ -40,42 +34,34 @@ button{
 商品をカメラに映してください
 </div>
 
-<button onclick="showLip()">
-💄 rebloom Lip
-</button>
-
-<button onclick="showCheek()">
-🌸 rebloom Cheek
-</button>
-
 
 <script>
 
 const video = document.getElementById("video");
+const result = document.getElementById("result");
 
 navigator.mediaDevices.getUserMedia({
- video:{
-  facingMode:"environment"
- }
+    video:{
+        facingMode:"environment"
+    }
 })
 .then(stream=>{
- video.srcObject = stream;
+    video.srcObject = stream;
 })
-.catch(err=>{
- alert(err);
+.catch(error=>{
+    alert("カメラが使えません");
 });
 
 
-function showLip(){
- document.getElementById("result").innerText =
- "rebloom Lip\n\n全成分\n水\nグリセリン\nBG\nシア脂";
-}
+// 仮の認識テスト
+// 後でAI認識に置き換える部分
 
+video.addEventListener("click",()=>{
 
-function showCheek(){
- document.getElementById("result").innerText =
- "rebloom Cheek\n\n全成分\nメントキシン\n果実エキス\n赤色顔料";
-}
+    result.innerText =
+    "rebloom Lip\n\n全成分\n水\nグリセリン\nBG\nシア脂";
+
+});
 
 </script>
 
