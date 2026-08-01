@@ -112,7 +112,7 @@ function recognize(){
   );
 
 
-  if(answer !== -1 && best < 3000){
+  if(answer !== -1 && best < -1){
 
     result.innerText = names[answer];
 
