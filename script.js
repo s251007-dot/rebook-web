@@ -1,4 +1,4 @@
-alert("script.js読み込み完了");
+alert("新しいscript.jsです");
 
 let data = [];
 let labels = [];
