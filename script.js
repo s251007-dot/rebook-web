@@ -6,6 +6,18 @@ let labels = [];
 const result = document.getElementById("result");
 const video = document.getElementById("video");
 
+navigator.mediaDevices.getUserMedia({
+  video: {
+    facingMode: "environment"
+  },
+  audio: false
+})
+.then(stream => {
+  video.srcObject = stream;
+})
+.catch(err => {
+  console.log(err);
+});
 const names = [
   "rebloom Lip\n\n全成分\n水\nグリセリン\nBG\nシア脂",
   "rebloom Cheek\n\n全成分\nメントキシン\n果実エキス\n赤色顔料"
