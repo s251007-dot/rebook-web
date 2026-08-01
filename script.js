@@ -34,7 +34,7 @@ Promise.all([
   data = d;
   labels = l;
 
-  console.log("データ読み込み成功");
+  alert("データ読み込み成功");
 
 });
 
