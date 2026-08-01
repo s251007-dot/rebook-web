@@ -112,12 +112,15 @@ function recognize(){
   );
 
 
-  if(answer !== -1){
+  if(answer !== -1 && best < 3000){
 
     result.innerText = names[answer];
 
-  }
+}else{
 
+    result.innerText = "商品をカメラに映してください";
+
+}
 }
 
 
