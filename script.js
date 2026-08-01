@@ -63,9 +63,9 @@ function recognize(){
 
   for(let i = 0; i < rgba.length; i += 4){
 
-    image.push(rgba[i]);
-    image.push(rgba[i+1]);
     image.push(rgba[i+2]);
+    image.push(rgba[i+1]);
+    image.push(rgba[i]);
 
   }
 
